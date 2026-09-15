@@ -1,0 +1,11 @@
+# GitHub Pages Configuration
+# This file automatically configures your site for GitHub Pages deployment
+
+site:
+  title: Silpa & Chandan - Wedding Invitation
+  description: Our Wedding Invitation - December 5, 2026
+  baseurl: /wedding-invitation
+
+# Theme configuration for GitHub Pages
+theme: jekyll-theme-minimal
+show_downloads: false
