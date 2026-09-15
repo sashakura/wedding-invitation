@@ -24,6 +24,52 @@ function updateCountdown() {
     }, 1000);
 }
 
+// Slideshow functionality
+let slideIndex = 1;
+
+function changeSlide(n) {
+    showSlide(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlide(slideIndex = n);
+}
+
+function showSlide(n) {
+    let slides = document.getElementsByClassName('slide');
+    let indicators = document.getElementsByClassName('indicator');
+    
+    if (n > slides.length) {
+        slideIndex = 1;
+    }
+    if (n < 1) {
+        slideIndex = slides.length;
+    }
+    
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('active');
+    }
+    for (let i = 0; i < indicators.length; i++) {
+        indicators[i].classList.remove('active');
+    }
+    
+    if (slides[slideIndex - 1]) {
+        slides[slideIndex - 1].classList.add('active');
+    }
+    if (indicators[slideIndex - 1]) {
+        indicators[slideIndex - 1].classList.add('active');
+    }
+}
+
+// Auto-advance slideshow every 5 seconds
+function autoSlideshow() {
+    let slides = document.getElementsByClassName('slide');
+    if (slides.length > 0) {
+        showSlide(slideIndex += 1);
+        setTimeout(autoSlideshow, 5000);
+    }
+}
+
 // Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -36,26 +82,29 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // RSVP Form Submission
-document.querySelector('.rsvp-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = {
-        name: this.querySelector('input[type="text"]').value,
-        email: this.querySelector('input[type="email"]').value,
-        phone: this.querySelector('input[type="tel"]').value,
-        attendance: this.querySelector('select').value,
-        requests: this.querySelector('textarea').value
-    };
-    
-    console.log('RSVP submitted:', formData);
-    
-    // Show success message
-    alert('Thank you for your RSVP! We look forward to celebrating with you. 🎉');
-    this.reset();
-    
-    // In a real application, you would send this data to a server
-    // Example: fetch('/api/rsvp', { method: 'POST', body: JSON.stringify(formData) })
-});
+const rsvpForm = document.querySelector('.rsvp-form');
+if (rsvpForm) {
+    rsvpForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            name: this.querySelector('input[type="text"]').value,
+            email: this.querySelector('input[type="email"]').value,
+            phone: this.querySelector('input[type="tel"]').value,
+            attendance: this.querySelector('select').value,
+            requests: this.querySelector('textarea').value
+        };
+        
+        console.log('RSVP submitted:', formData);
+        
+        // Show success message
+        alert('Thank you for your RSVP! We look forward to celebrating with you. 🎉');
+        this.reset();
+        
+        // In a real application, you would send this data to a server
+        // Example: fetch('/api/rsvp', { method: 'POST', body: JSON.stringify(formData) })
+    });
+}
 
 // Navbar scroll effect
 let lastScroll = 0;
@@ -76,6 +125,8 @@ window.addEventListener('scroll', () => {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
+    showSlide(slideIndex);
+    autoSlideshow();
 });
 
 // Add fade-in animation on scroll
