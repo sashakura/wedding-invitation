@@ -190,6 +190,26 @@ body {
     background: white;
 }
 
+.couple-photo-section {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.main-photo {
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    animation: fadeInUp 1s ease-out;
+}
+
+.main-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .couple-grid {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -262,6 +282,7 @@ body {
 .couple h2,
 .countdown h2,
 .families h2,
+.gallery h2,
 .rsvp h2 {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
@@ -346,10 +367,133 @@ body {
     letter-spacing: 2px;
 }
 
+/* Gallery Section */
+.gallery {
+    padding: 80px 0;
+    background: var(--light-bg);
+}
+
+/* Slideshow Container */
+.slideshow-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    animation: fadeInSlide 1s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.slide.fade {
+    animation: fadeInSlide 1s ease-in-out;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slide.active {
+    display: block;
+}
+
+/* Previous & next buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.3s ease;
+    border-radius: 3px;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+}
+
+.prev {
+    left: 0;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Slideshow indicators */
+.slideshow-indicators {
+    text-align: center;
+    padding: 20px;
+    background: white;
+}
+
+.indicator {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+    background-color: var(--secondary-color);
+}
+
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    aspect-ratio: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* Families Section */
 .families {
     padding: 80px 0;
-    background: var(--light-bg);
+    background: white;
 }
 
 .families-grid {
@@ -359,7 +503,7 @@ body {
 }
 
 .family-card {
-    background: white;
+    background: var(--light-bg);
     padding: 40px 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -405,7 +549,7 @@ body {
 }
 
 .residence-member {
-    background: var(--light-bg);
+    background: white;
     padding: 15px;
     border-radius: 5px;
     border-bottom: none !important;
@@ -414,7 +558,7 @@ body {
 /* RSVP Section */
 .rsvp {
     padding: 80px 0;
-    background: white;
+    background: var(--light-bg);
 }
 
 .rsvp-text {
@@ -427,7 +571,7 @@ body {
 .rsvp-form {
     max-width: 600px;
     margin: 0 auto;
-    background: var(--light-bg);
+    background: white;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -533,6 +677,7 @@ body {
     .couple h2,
     .countdown h2,
     .families h2,
+    .gallery h2,
     .rsvp h2 {
         font-size: 2rem;
     }
@@ -566,6 +711,11 @@ body {
     .person-card h2 {
         font-size: 1.8rem;
     }
+
+    .prev, .next {
+        padding: 10px;
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -593,6 +743,7 @@ body {
     .couple h2,
     .countdown h2,
     .families h2,
+    .gallery h2,
     .rsvp h2 {
         font-size: 1.5rem;
         margin-bottom: 40px;
